@@ -46,7 +46,7 @@ config.initial_rows = 40
 -- 3. 颜色与透明度 (Colors & Opacity)
 ----------------------------------------------------------------
 -- WezTerm 内置了 Catppuccin Mocha，不需要手动复制十六进制码
-config.color_scheme = 'Everforest Dark (Gogh)'
+config.color_scheme = 'Zenburn'
 config.window_background_opacity = 0.85
 -- 注意：MacOS 上需要设置 macos_window_background_blur 来实现模糊效果
 config.macos_window_background_blur = 10 

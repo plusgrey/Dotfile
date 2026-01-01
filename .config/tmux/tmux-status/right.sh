@@ -23,12 +23,15 @@ fi
 
 segment_bg="#3b4252"
 segment_fg="#eceff4"
-# Host (domain) colors to mirror left active style
-host_bg="${TMUX_THEME_COLOR:-#b294bb}"
-host_fg="#1d1f21"
-separator=""
+# DateTime colors to mirror left active style
+datetime_bg="${TMUX_THEME_COLOR:-#FFC0CB}"
+datetime_fg="#1d1f21"
+separator=""
 right_cap="█"
-hostname=$(hostname -s 2>/dev/null || hostname 2>/dev/null || printf 'host')
+
+# 获取当前日期和时间
+datetime=$(date '+%Y-%m-%d %H:%M')
+
 rainbarf_bg="#2e3440"
 rainbarf_segment=""
 rainbarf_toggle="${TMUX_RAINBARF:-1}"
@@ -52,17 +55,17 @@ if [[ "$rainbarf_toggle" == "1" ]] && command -v rainbarf >/dev/null 2>&1; then
   fi
 fi
 
-# Build a connector into the hostname segment using host colors
-host_connector_bg="$status_bg"
+# Build a connector into the datetime segment using datetime colors
+datetime_connector_bg="$status_bg"
 if [[ -n "$rainbarf_segment" ]]; then
-  host_connector_bg="$rainbarf_bg"
+  datetime_connector_bg="$rainbarf_bg"
 fi
-host_prefix=$(printf '#[fg=%s,bg=%s]%s#[fg=%s,bg=%s] ' \
-  "$host_bg" "$host_connector_bg" "$separator" \
-  "$host_fg" "$host_bg")
+datetime_prefix=$(printf '#[fg=%s,bg=%s]%s#[fg=%s,bg=%s] ' \
+  "$datetime_bg" "$datetime_connector_bg" "$separator" \
+  "$datetime_fg" "$datetime_bg")
 
 printf '%s%s%s #[fg=%s,bg=%s]%s' \
   "$rainbarf_segment" \
-  "$host_prefix" \
-  "$hostname" \
-  "$host_bg" "$status_bg" "$right_cap"
+  "$datetime_prefix" \
+  "$datetime" \
+  "$datetime_bg" "$status_bg" "$right_cap"

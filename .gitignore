@@ -54,6 +54,9 @@
 # Yazi
 !.config/yazi/
 !.config/yazi/**
+
+# Installation scripts
+!install.sh
 ####################################
 # END
 ####################################

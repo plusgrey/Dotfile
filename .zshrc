@@ -105,4 +105,35 @@ fi
 source ${ZIM_HOME}/init.zsh
 # }}} End configuration added by Zim Framework install
 export PATH="/home/jh/.pixi/bin:$PATH"
+# 设置 vi 模式
+bindkey -v
+
+# 减少 ESC 键的延迟（默认 0.4 秒太长，切模式会卡顿）
+export KEYTIMEOUT=1
+
+# 定义一个函数，根据当前的 keymap 改变光标形状
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+    # Normal 模式 (Command Mode) -> 实心块状光标 (Block)
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
+    # Insert 模式 -> 竖线光标 (Beam)
+    echo -ne '\e[5 q'
+  fi
+}
+
+# 注册该函数到 Zsh 的行编辑器 (ZLE) 钩子
+zle -N zle-keymap-select
+
+# 初始化时强制设为竖线光标（Insert 模式样式）
+zle-line-init() {
+  zle -K viins # 默认进入插入模式
+  echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+
+# 这是一个额外的钩子，确保每次新命令行开始时光标重置为 Insert 样式
+precmd() {
+    echo -ne "\e[5 q"
+}
 # Created by newuser for 5.9

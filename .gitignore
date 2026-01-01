@@ -19,9 +19,9 @@
 # config directory
 !.config/
 
-# kitty terminal
-!.config/kitty/
-!.config/kitty/**
+# ghostty terminal
+!.config/ghostty/
+!.config/ghostty/**
 
 # wezterm terminal
 !.config/wezterm/

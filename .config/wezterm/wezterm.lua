@@ -11,7 +11,17 @@ end
 -- 1. 字体 (Font)
 ----------------------------------------------------------------
 -- WezTerm 会自动查找系统安装的 Nerd Fonts
-config.font = wezterm.font 'MesloLGS Nerd Font Mono'
+-- config.font = wezterm.font 'MesloLGS Nerd Font Mono'
+config.font = wezterm.font_with_fallback({
+	{
+		family = "MesloLGS Nerd Font Mono",
+		weight = "Bold",
+	},
+	{
+		family = "Noto Sans CJK SC",
+		weight = "Regular",
+	},
+})
 config.font_size = 12.5
 config.line_height = 1.1 -- 对应 Kitty 的 110%
 

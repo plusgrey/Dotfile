@@ -104,36 +104,71 @@ fi
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 # }}} End configuration added by Zim Framework install
-export PATH="/home/jh/.pixi/bin:$PATH"
-# 设置 vi 模式
-bindkey -v
 
-# 减少 ESC 键的延迟（默认 0.4 秒太长，切模式会卡顿）
+# ======================
+# Personal Configuration
+# ======================
+
+# --------
+# ENV PATH
+# --------
+export PATH="/home/jh/.pixi/bin:$PATH"
+
+# ---------------
+# Vi Mode Setup
+# ---------------
+
+# 减少 ESC 键的延迟（从默认的 0.4 秒降低到 0.01 秒）
 export KEYTIMEOUT=1
 
-# 定义一个函数，根据当前的 keymap 改变光标形状
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
-    # Normal 模式 (Command Mode) -> 实心块状光标 (Block)
-    echo -ne '\e[1 q'
-  elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
-    # Insert 模式 -> 竖线光标 (Beam)
-    echo -ne '\e[5 q'
-  fi
-}
+# 按键绑定
+bindkey '^l' autosuggest-accept  # Ctrl+L 接受建议
 
-# 注册该函数到 Zsh 的行编辑器 (ZLE) 钩子
+# Vi 模式光标形状切换
+function zle-keymap-select {
+  case ${KEYMAP} in
+    vicmd)      echo -ne '\e[1 q' ;;  # Normal 模式: 块状光标
+    viins|main) echo -ne '\e[5 q' ;;  # Insert 模式: 竖线光标
+  esac
+}
 zle -N zle-keymap-select
 
-# 初始化时强制设为竖线光标（Insert 模式样式）
-zle-line-init() {
-  zle -K viins # 默认进入插入模式
-  echo -ne "\e[5 q"
+# 初始化时设置为竖线光标
+function zle-line-init {
+  zle -K viins
+  echo -ne '\e[5 q'
 }
 zle -N zle-line-init
 
-# 这是一个额外的钩子，确保每次新命令行开始时光标重置为 Insert 样式
-precmd() {
-    echo -ne "\e[5 q"
+# 每次命令执行后重置为竖线光标
+function zle-line-finish {
+  echo -ne '\e[5 q'
 }
-# Created by newuser for 5.9
+zle -N zle-line-finish
+
+# -------
+# Aliases
+# -------
+
+# 系统命令
+alias c='clear'
+alias ll='ls -la'
+
+# Git
+alias gs='git status'
+alias lg='lazygit'
+
+# 开发工具
+alias py='python'
+alias px='pixi'
+alias nv='nvim'
+
+# Tmux
+alias t='tmux'
+alias ta='tmux attach'
+alias tk='tmux kill-session'
+alias tl='tmux list-sessions'
+
+# 其他
+alias ff='fastfetch'
+

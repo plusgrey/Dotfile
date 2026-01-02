@@ -13,6 +13,14 @@ sudo pacman -S --needed --noconfirm \
   ttf-meslo-nerd \
   git \
   base-devel \
+  xorg-xwayland \
+  wl-clipboard \
+  grim slurp \
+  swaybg \
+  mako \
+  poolkit-gnome \
+  wayland-protocols \
+  rofi-wayland \
 
 #install rime-ice
 cd ~/Downloads
@@ -25,18 +33,16 @@ if [ ! -d "plum" ]; then
 fi
 cd ~
 
-# intall yay
+# intall paru
 cd ~/Downloads
-if [ ! -d "yay" ]; then
-  git clone https://aur.archlinux.org/yay.git
-fi
-cd yay
-makepkg -si --noconfirm
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
 cd ~
-rm -rf ~/Downloads/yay
+rm -rf ~/Downloads/paru
 
-# instsall yay packages
-yay -S --needed --noconfirm \
+# install paru packages
+paru -S --needed --noconfirm \
   visual-studio-code-bin \
   google-chrome \
 
@@ -47,4 +53,11 @@ curl -fsSL https://pixi.sh/install.sh | sh
 export PATH="$HOME/.pixi/bin:$PATH"
 
 	
+# set zsh as default shell
+chsh -s /bin/zsh
 
+#config nvidia for niri
+sudo tee /etc/modprobe.d/nvidia.conf << 'EOF'
+options nvidia-drm modeset=1
+EOF
+sudo mkinitcpio -P

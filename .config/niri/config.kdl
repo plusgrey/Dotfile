@@ -1,0 +1,214 @@
+// Niri 配置文件
+// 参考: https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
+
+// 输入设备配置
+input {
+    keyboard {
+        xkb {
+            layout "us"
+            // 如果需要中文输入，可以添加: options "grp:alt_shift_toggle"
+        }
+        repeat-delay 600
+        repeat-rate 25
+    }
+    
+    touchpad {
+        tap
+        dwt
+        natural-scroll
+        accel-speed 0.0
+    }
+    
+    mouse {
+        accel-speed 0.0
+    }
+}
+
+// 输出配置（显示器）
+output "AUOBE8E" {
+    mode "1920x1080@300"
+    scale 1.0
+    position x=0 y=0
+}
+
+// 布局配置
+layout {
+    gaps 8
+    center-focused-column "never"
+    
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    
+    default-column-width { proportion 0.5; }
+    
+    focus-ring {
+        width 2
+        active-color "#7fc8ff"
+        inactive-color "#505050"
+    }
+    
+    border {
+        width 1
+        active-color "#7fc8ff"
+        inactive-color "#505050"
+    }
+}
+
+// 生成配置
+spawn-at-startup "wezterm"
+spawn-at-startup "mako"  // 通知守护进程
+spawn-at-startup "waybar" // 状态栏（可选）
+
+// 环境变量
+environment {
+    // NVIDIA 支持（你有 RTX 2070）
+    WLR_DRM_DEVICES "/dev/dri/card1:/dev/dri/card0"
+    GBM_BACKEND "nvidia-drm"
+    __GLX_VENDOR_LIBRARY_NAME "nvidia"
+    
+    // Wayland 相关
+    XCURSOR_SIZE "24"
+    XCURSOR_THEME "WhiteSur"
+}
+
+// 快捷键绑定
+binds {
+    // 基础窗口管理
+    Mod+Return { spawn "wezterm"; }
+    Mod+D { spawn "rofi" "-show" "drun"; }
+    Mod+Q { close-window; }
+    
+    // 焦点移动
+    Mod+H { focus-column-left; }
+    Mod+L { focus-column-right; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+    Mod+Left { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Down { focus-window-down; }
+    Mod+Up { focus-window-up; }
+    
+    // 窗口移动
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+Left { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+Down { move-window-down; }
+    Mod+Shift+Up { move-window-up; }
+    
+    // 窗口大小调整
+    Mod+R { switch-preset-column-width; }
+    Mod+F { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+C { center-column; }
+    
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+    
+    // 工作区切换
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    
+    // 移动窗口到工作区
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+    
+    // 工作区导航
+    Mod+Tab { focus-workspace-down; }
+    Mod+Shift+Tab { focus-workspace-up; }
+    
+    // 截图
+    Print { spawn "grim" "-g" "$(slurp)" "-" "|" "wl-copy"; }
+    Mod+Print { spawn "grim" "-" "|" "wl-copy"; }
+    
+    // 系统控制
+    Mod+Shift+E { quit; }
+    Mod+Shift+P { power-off-monitors; }
+    
+    // 音量控制
+    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    
+    // 亮度控制
+    XF86MonBrightnessUp { spawn "brightnessctl" "set" "5%+"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
+}
+
+// 动画配置
+animations {
+    window-open {
+        duration-ms 150
+        curve "ease-out-cubic"
+    }
+    
+    window-close {
+        duration-ms 150
+        curve "ease-out-cubic"
+    }
+    
+    window-movement {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+    
+    workspace-switch {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+    
+    horizontal-view-movement {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+}
+
+// 窗口规则
+window-rule {
+    match app-id="firefox"
+    default-column-width { proportion 0.75; }
+}
+
+window-rule {
+    match app-id="org.telegram.desktop"
+    default-column-width { proportion 0.33; }
+}
+
+// 调试选项（可选）
+debug {
+    render-drm-device "/dev/dri/renderD128"
+}
+
+// 光标主题
+cursor {
+    xcursor-theme "WhiteSur"
+    xcursor-size 24
+}
+
+// 偏好设置
+prefer-no-csd
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}

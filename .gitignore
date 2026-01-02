@@ -57,6 +57,10 @@
 
 # Installation scripts
 !install.sh
+
+# niri
+!.config/niri/
+!.config/niri/**
 ####################################
 # END
 ####################################

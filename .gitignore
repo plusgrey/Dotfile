@@ -16,8 +16,9 @@
 !.gitconfig
 !.gitignore
 
-# config directory
+# config directory and Wallpapers
 !.config/
+!Pictures/Wallpapers/**
 
 # ghostty terminal
 !.config/ghostty/
@@ -61,6 +62,10 @@
 # niri
 !.config/niri/
 !.config/niri/**
+
+#noctalia
+!.config/noctalia/
+!.config/noctalia/**
 ####################################
 # END
 ####################################

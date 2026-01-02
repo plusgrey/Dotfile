@@ -20,7 +20,12 @@ sudo pacman -S --needed --noconfirm \
   mako \
   poolkit-gnome \
   wayland-protocols \
-  rofi-wayland \
+  fcitx5-qt \
+  fcitx5-gtk \
+  fcitx5-configtool \
+  fcitx5 \
+  fcitx5-rime \
+  xwayland-satellite \
 
 #install rime-ice
 cd ~/Downloads
@@ -45,7 +50,10 @@ rm -rf ~/Downloads/paru
 paru -S --needed --noconfirm \
   visual-studio-code-bin \
   google-chrome \
-
+  niri \
+  noctalia-shell \
+  vim-wayland-clipboard \
+  rime-ice-git \
 
 curl -fsSL https://pixi.sh/install.sh | sh
 

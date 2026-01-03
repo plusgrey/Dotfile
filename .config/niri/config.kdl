@@ -1,4 +1,4 @@
-// Niri 配置文件 - 优化版
+// Niri 配置文件
 
 input {
     keyboard {
@@ -72,7 +72,6 @@ binds {
 
     // 修改后的 Chrome 启动命令 (增加稳定性)
     Mod+B { spawn "google-chrome-stable" "--ozone-platform-hint=auto" "--enable-features=WaylandWindowDecorations"; }
-    
     Mod+Q { close-window; }
     Mod+Shift+Slash { show-hotkey-overlay; } // 忘记快捷键时按 Mod+?
 

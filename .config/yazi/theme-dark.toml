@@ -10,8 +10,8 @@
 # : Flavor {{{
 
 [flavor]
-dark  = ""
-light = ""
+dark  = "everforest-dark"
+light = "everforest-light"
 
 # : }}}
 

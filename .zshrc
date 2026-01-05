@@ -154,6 +154,43 @@ function zle-line-finish {
 }
 zle -N zle-line-finish
 
+# Wayland 剪贴板集成 (使用 wl-copy 和 wl-paste)
+function wayland-clip-wrap-widgets() {
+    local copy_or_paste=$1
+    shift
+
+    for widget in $@; do
+        if [[ $copy_or_paste == "copy" ]]; then
+            eval "
+            function _wayland-clip-wrapped-$widget() {
+                zle .$widget
+                echo -n \$CUTBUFFER | wl-copy
+            }
+            "
+        else
+            eval "
+            function _wayland-clip-wrapped-$widget() {
+                CUTBUFFER=\$(wl-paste)
+                zle .$widget
+            }
+            "
+        fi
+
+        zle -N $widget _wayland-clip-wrapped-$widget
+    done
+}
+
+# 要包装的复制和粘贴 widgets
+local copy_widgets=(
+    vi-yank vi-yank-eol vi-delete vi-backward-kill-word vi-change-whole-line
+)
+local paste_widgets=(
+    vi-put-after vi-put-before
+)
+
+wayland-clip-wrap-widgets copy $copy_widgets
+wayland-clip-wrap-widgets paste $paste_widgets
+
 # -------
 # Aliases
 # -------
@@ -161,6 +198,10 @@ zle -N zle-line-finish
 # 系统命令
 alias c='clear'
 alias ll='ls -la'
+alias lh='ls -lh'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ~='cd ~'
 
 # Git
 alias gs='git status'

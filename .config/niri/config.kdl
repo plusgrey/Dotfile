@@ -10,7 +10,7 @@ input {
     }
     
     touchpad {
-        tap
+        //tap
         dwt
         natural-scroll
         accel-speed 0.2 // 稍微增加一点速度
@@ -193,4 +193,10 @@ prefer-no-csd
 // 禁用开机自动显示快捷键提示
 hotkey-overlay {
     skip-at-startup
+}
+
+gestures {
+    hot-corners{
+      off
+    }
 }

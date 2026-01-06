@@ -203,7 +203,7 @@
         ]
     },
     "colorSchemes": {
-        "darkMode": false,
+        "darkMode": true,
         "generateTemplatesForPredefined": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
@@ -455,7 +455,7 @@
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
         "cpuWarningThreshold": 80,
-        "criticalColor": "",
+        "criticalColor": "#e67e80",
         "diskCriticalThreshold": 90,
         "diskPath": "/",
         "diskPollingInterval": 3000,
@@ -472,7 +472,7 @@
         "tempPollingInterval": 3000,
         "tempWarningThreshold": 0,
         "useCustomColors": false,
-        "warningColor": ""
+        "warningColor": "#9da9a0"
     },
     "templates": {
         "alacritty": false,

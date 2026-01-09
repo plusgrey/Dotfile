@@ -60,7 +60,7 @@
                     "hideMode": "alwaysExpanded",
                     "icon": "rocket",
                     "id": "CustomButton",
-                    "leftClickExec": "qs -c noctalia-shell ipc call launcher toggle",
+                    "leftClickExec": "sh -lc 'if [ -e /etc/NIXOS ]; then noctalia-shell ipc call launcher toggle; else qs -c noctalia-shell toggle; fi'",
                     "leftClickUpdateText": false,
                     "maxTextLength": {
                         "horizontal": 10,

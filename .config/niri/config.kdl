@@ -44,7 +44,7 @@ layout {
 
 // --- 启动项 ---
 spawn-at-startup "wezterm"
-spawn-at-startup "qs" "c" "noctalia-shell"
+spawn-at-startup "sh" "-lc" "if [-e /etc/NIXOS]; then noctalia-shell; else qs -c noctalia-shell; fi"
 spawn-at-startup "fcitx5" "-d"
 
 // --- 环境变量 (解决输入法和 Chrome 问题) ---
@@ -68,7 +68,8 @@ environment {
 binds {
     // ========== 基础应用启动 ==========
     Mod+T { spawn "wezterm"; }
-    Mod+D { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+D { spawn "sh" "-lc" "if [-e /etc/NIXOS]; then noctalia-shell ipc call launcher toggle; else qs -c noctalia-shell ipc call launcher toggle; fi"
+}
     Mod+B { spawn "google-chrome-stable" "--ozone-platform-hint=auto" "--enable-features=WaylandWindowDecorations"; }
     Mod+Q { close-window; }
     Mod+Shift+Slash { show-hotkey-overlay; } // 手动查看快捷键提示 (Mod+?)

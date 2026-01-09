@@ -73,6 +73,12 @@
 
 #useful scripts
 !.config/rename_nvim_profile.sh
+
+#fcitx5
+!.local/
+!.local/share/
+!.local/share/fcitx5/
+!.local/share/fcitx5/**
 ####################################
 # END
 ####################################

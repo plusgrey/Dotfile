@@ -1,0 +1,7 @@
+patch:
+  __include: "rime_ice_suggestion:/"
+var:
+  last_build_time: 1767974570
+  previously_selected_schema: rime_ice
+  schema_access_time:
+    rime_ice: 1767617596

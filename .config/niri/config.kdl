@@ -8,7 +8,7 @@ input {
         repeat-delay 600
         repeat-rate 25
     }
-    
+
     touchpad {
         //tap
         dwt
@@ -26,15 +26,15 @@ output "eDP-1" {
 layout {
     gaps 8
     center-focused-column "never"
-    
+
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
     }
-    
+
     default-column-width { proportion 0.5; }
-    
+
     focus-ring {
         width 2
         active-color "#7fc8ff"
@@ -44,8 +44,7 @@ layout {
 
 // --- 启动项 ---
 spawn-at-startup "wezterm"
-spawn-at-startup "mako"
-spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "noctalia-shell"
 spawn-at-startup "fcitx5" "-d"
 
 // --- 环境变量 (解决输入法和 Chrome 问题) ---
@@ -54,12 +53,12 @@ environment {
     WLR_DRM_DEVICES "/dev/dri/card1:/dev/dri/card0"
     GBM_BACKEND "nvidia-drm"
     __GLX_VENDOR_LIBRARY_NAME "nvidia"
-    QT_QPA_PLATFORMTHEME "qt6ct"   
+    QT_QPA_PLATFORMTHEME "qt6ct"
     // 中文输入法配置
     QT_IM_MODULE "fcitx"
     //GTK_IM_MODULE "ibus"
     XMODIFIERS "@im=fcitx"
-    
+
     // 强制部分应用使用 Wayland
     MOZ_ENABLE_WAYLAND "1"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
@@ -73,7 +72,7 @@ binds {
     Mod+B { spawn "google-chrome-stable" "--ozone-platform-hint=auto" "--enable-features=WaylandWindowDecorations"; }
     Mod+Q { close-window; }
     Mod+Shift+Slash { show-hotkey-overlay; } // 手动查看快捷键提示 (Mod+?)
-    
+
     // ========== Overview (工作区总览) ==========
     Mod+Tab { toggle-overview; }
     // ========== 窗口焦点移动 (HJKL) ==========
@@ -81,13 +80,13 @@ binds {
     Mod+L { focus-column-right; }
     Mod+J { focus-window-or-workspace-down; }
     Mod+K { focus-window-or-workspace-up; }
-    
+
     // ========== 窗口/列移动 ==========
     Mod+Shift+H { move-column-left; }
     Mod+Shift+L { move-column-right; }
     Mod+Shift+J { move-window-down-or-to-workspace-down; }
     Mod+Shift+K { move-window-up-or-to-workspace-up; }
-    
+
     // ========== 布局控制 ==========
     Mod+R { switch-preset-column-width; }
     Mod+F { maximize-column; }
@@ -112,7 +111,7 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    
+
     // ========== 工作区切换 (上/下导航) ==========
     Mod+Page_Down { focus-workspace-down; }      // 切换到下一个工作区
     Mod+Page_Up { focus-workspace-up; }          // 切换到上一个工作区
@@ -156,12 +155,12 @@ binds {
     Mod+Shift+S { spawn "sh" "-c" "file=~/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png; grim -g \"$(slurp)\" \"$file\" && wl-copy < \"$file\" && notify-send -t 3000 'Screenshot Saved & Copied'"; }
     // ========== 系统控制 ==========
     Mod+Shift+E { quit; }
-    
+
     // ========== 音量控制 ==========
     XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
     XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
     XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    
+
     // ========== 亮度控制 ==========
     XF86MonBrightnessUp { spawn "brightnessctl" "set" "5%+"; }
     XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }

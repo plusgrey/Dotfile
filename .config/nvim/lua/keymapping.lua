@@ -22,4 +22,4 @@ vim.keymap.set("n", "<A-z>", "<CMD>set wrap!<CR>", { desc = "Toggle line wrap" }
 vim.keymap.set({ "n", "x" }, "x", '"_x')
 vim.keymap.set({ "n", "x" }, "d", '"_d')
 vim.keymap.set("n", "c", '"_c')
-vim.keymap.set({ "n", "dd" }, "dd", '"_dd')
+vim.keymap.set({ "n", "v" }, "dd", '"_dd')

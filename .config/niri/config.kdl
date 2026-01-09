@@ -44,7 +44,7 @@ layout {
 
 // --- 启动项 ---
 spawn-at-startup "wezterm"
-spawn-at-startup "noctalia-shell"
+spawn-at-startup "qs" "c" "noctalia-shell"
 spawn-at-startup "fcitx5" "-d"
 
 // --- 环境变量 (解决输入法和 Chrome 问题) ---

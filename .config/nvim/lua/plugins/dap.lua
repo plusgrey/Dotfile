@@ -62,6 +62,12 @@ return {
       { "<F8>",       function() require("dap").step_out() end,                                                        mode = "n",          desc = "[DAP] Step out" },
       { "<F9>",       function() require("dap").pause() end,                                                           mode = "n",          desc = "[DAP] Pause" },
       { "<F10>",      function() require("dap").terminate() end,                                                       mode = "n",          desc = "[DAP] Terminate" },
+      -- Alternative keymaps using <Leader>D prefix (if F-keys don't work in terminal)
+      { "<Leader>Dc", function() require("dap").continue() end,                                                        mode = "n",          desc = "[DAP] Continue" },
+      { "<Leader>Do", function() require("dap").step_over() end,                                                       mode = "n",          desc = "[DAP] Step over" },
+      { "<Leader>Di", function() require("dap").step_into() end,                                                       mode = "n",          desc = "[DAP] Step into" },
+      { "<Leader>DO", function() require("dap").step_out() end,                                                        mode = "n",          desc = "[DAP] Step out" },
+      { "<Leader>Dq", function() require("dap").terminate() end,                                                       mode = "n",          desc = "[DAP] Terminate" },
       { "<Leader>b",  function() require("dap").toggle_breakpoint() end,                                               mode = "n",          desc = "[DAP] Toggle breakpoint" },
       { "<Leader>B",  function() require("dap").set_breakpoint() end,                                                  mode = "n",          desc = "[DAP] Set breakpoint" },
       -- Remove the <leader>D binding in "x" mode
@@ -95,6 +101,21 @@ return {
       dap.defaults.fallback.external_terminal = {
         command = "wezterm",
       }
+
+      -- Fix: Disable winfixbuf before DAP jumps to source location
+      -- This prevents "E1513: Cannot switch buffer. 'winfixbuf' is enabled" error
+      dap.listeners.before.event_stopped["fix_winfixbuf"] = function()
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+          if vim.api.nvim_win_is_valid(win) then
+            local buf = vim.api.nvim_win_get_buf(win)
+            local ft = vim.bo[buf].filetype
+            -- Only disable winfixbuf for normal code windows, not for special buffers
+            if not vim.tbl_contains({ "dap-repl", "dap-view", "dap-view-term", "snacks_picker" }, ft) then
+              pcall(vim.api.nvim_set_option_value, "winfixbuf", false, { win = win })
+            end
+          end
+        end
+      end
     end,
   },
 }

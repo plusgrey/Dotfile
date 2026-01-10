@@ -1,4 +1,4 @@
-vim.lsp.enable("basedpyright")
+vim.lsp.enable("pyright")
 
 local M = {
   {
@@ -102,6 +102,38 @@ local M = {
             local args_str = vim.fn.input("Commandline args: ")
             return vim.split(args_str, " ", { plain = true })
           end,
+        },
+        {
+          type = "python",
+          request = "attach",
+          name = "[Python] Attach to remote (localhost:5678)",
+          connect = {
+            host = "127.0.0.1",
+            port = 5678,
+          },
+          pathMappings = {
+            {
+              localRoot = "${workspaceFolder}",
+              remoteRoot = ".",
+            },
+          },
+        },
+        {
+          type = "python",
+          request = "attach",
+          name = "[Python] Attach to remote (custom port)",
+          connect = function()
+            local host = vim.fn.input("Host [127.0.0.1]: ")
+            host = host ~= "" and host or "127.0.0.1"
+            local port = tonumber(vim.fn.input("Port [5678]: ")) or 5678
+            return { host = host, port = port }
+          end,
+          pathMappings = {
+            {
+              localRoot = "${workspaceFolder}",
+              remoteRoot = ".",
+            },
+          },
         },
       }
     end,

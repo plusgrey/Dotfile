@@ -140,7 +140,8 @@
                     "id": "Tray",
                     "pinned": [
                         "Keyboard - English (US)",
-                        "Rime"
+                        "Rime",
+                        "Keyboard - English (US)"
                     ]
                 },
                 {
@@ -203,7 +204,7 @@
         ]
     },
     "colorSchemes": {
-        "darkMode": false,
+        "darkMode": true,
         "generateTemplatesForPredefined": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",

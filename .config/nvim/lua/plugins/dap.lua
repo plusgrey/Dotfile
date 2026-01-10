@@ -24,10 +24,10 @@ return {
         },
       },
       windows = {
-        height = 0.25,
+        -- height = 0.25,
         position = "below",
         terminal = {
-          width = 0.1,
+          -- width = 0.1,
           position = "right",
           -- List of debug adapters for which the terminal should be ALWAYS hidden
           hide = {},
@@ -93,7 +93,7 @@ return {
     config = function()
       local dap = require("dap")
       dap.defaults.fallback.external_terminal = {
-        command = "kitty",
+        command = "wezterm",
       }
     end,
   },

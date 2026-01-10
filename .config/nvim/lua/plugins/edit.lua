@@ -14,6 +14,12 @@ return {
   -- },
 
   {
+    "NotAShelf/direnv.nvim",
+    config = function()
+      require("direnv").setup({})
+    end,
+  },
+  {
     "mbbill/undotree",
     keys = {
       { "<leader>ut", "<cmd>UndotreeToggle<cr>", desc = "Toggle undo-tree" },
@@ -191,5 +197,5 @@ return {
     end,
   },
 
-  { "wakatime/vim-wakatime", lazy = false },
+  -- { "wakatime/vim-wakatime", lazy = false },
 }

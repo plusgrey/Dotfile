@@ -68,8 +68,8 @@ return {
       { "<Leader>Di", function() require("dap").step_into() end,                                                       mode = "n",          desc = "[DAP] Step into" },
       { "<Leader>DO", function() require("dap").step_out() end,                                                        mode = "n",          desc = "[DAP] Step out" },
       { "<Leader>Dq", function() require("dap").terminate() end,                                                       mode = "n",          desc = "[DAP] Terminate" },
-      { "<Leader>b",  function() require("dap").toggle_breakpoint() end,                                               mode = "n",          desc = "[DAP] Toggle breakpoint" },
-      { "<Leader>B",  function() require("dap").set_breakpoint() end,                                                  mode = "n",          desc = "[DAP] Set breakpoint" },
+      { "<Leader>Db",  function() require("dap").toggle_breakpoint() end,                                              mode = "n",          desc = "[DAP] Toggle breakpoint" },
+      { "<Leader>DB",  function() require("dap").set_breakpoint() end,                                                 mode = "n",          desc = "[DAP] Set breakpoint" },
       -- Remove the <leader>D binding in "x" mode
       { "<Leader>D" , mode = "x" },
       { "<Leader>Dr", function() require("dap").repl.open() end,                                                       mode = "n",          desc = "[DAP] Repl open" },

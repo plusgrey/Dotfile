@@ -18,6 +18,9 @@ vim.keymap.set({ "n", "x" }, "qq", "<CMD>:q<CR>")
 
 vim.keymap.set("n", "<A-z>", "<CMD>set wrap!<CR>", { desc = "Toggle line wrap" })
 
+-- Quick save with Ctrl+S
+vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<CMD>w<CR>", { desc = "Save file" })
+
 --delete without yanking
 vim.keymap.set({ "n", "x" }, "x", '"_x')
 vim.keymap.set({ "n", "x" }, "d", '"_d')

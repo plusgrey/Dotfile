@@ -99,6 +99,7 @@
 
 | 快捷键 | 模式 | 功能 |
 |--------|------|------|
+| `Ctrl+s` | n/i/v | 快速保存文件 |
 | `jk` | Insert | 退出 Insert 模式 (等同 Esc) |
 | `Ctrl+h/j/k/l` | Insert | 在 Insert 模式下移动光标 |
 | `Ctrl+h/j/k/l` | Normal | 切换窗口 |
@@ -120,14 +121,32 @@
 
 > **修改位置**: [lua/plugins/ui.lua](lua/plugins/ui.lua) - `romgrk/barbar.nvim`
 
+#### Alt 快捷键
+
 | 快捷键 | 功能 |
 |--------|------|
 | `Alt+h` | 上一个 buffer |
 | `Alt+l` | 下一个 buffer |
-| `Alt+1~9` | 跳转到第 1~9 个 buffer |
 | `Alt+<` | 将 buffer 向左移动 |
 | `Alt+>` | 将 buffer 向右移动 |
 | `Alt+w` | 关闭当前 buffer (Snacks) |
+
+#### Leader+b 快捷键
+
+| 快捷键 | 功能 |
+|--------|------|
+| `<Leader>b1~9` | 跳转到第 1~9 个 buffer |
+| `<Leader>bn` | 下一个 buffer |
+| `<Leader>bp` | 上一个 buffer |
+| `<Leader>bf` | 第一个 buffer |
+| `<Leader>bl` | 最后一个 buffer |
+| `<Leader>b<` | 将 buffer 向左移动 |
+| `<Leader>b>` | 将 buffer 向右移动 |
+| `<Leader>br` | 重命名 buffer |
+| `<Leader>bc` | 关闭当前 buffer |
+| `<Leader>bC` | 关闭其他所有 buffer |
+| `<Leader>bP` | 固定/取消固定 buffer |
+| `<Leader>bo` | 按目录排序 buffer |
 
 ### 窗口操作 (Vim 原生)
 
@@ -299,8 +318,8 @@
 
 | 快捷键 | 功能 |
 |--------|------|
-| `<Leader>b` | 切换断点 |
-| `<Leader>B` | 设置断点 (条件) |
+| `<Leader>Db` | 切换断点 |
+| `<Leader>DB` | 设置断点 (条件) |
 | `<Leader>Du` | 切换 dap-view 面板 |
 | `<Leader>Dr` | 打开 REPL |
 | `<Leader>Dl` | 运行上一次配置 |

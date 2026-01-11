@@ -62,7 +62,7 @@ def sanitize_label(label: str) -> str:
 
 def apply_order(ordered_sessions: List[Dict[str, object]]) -> None:
     for position, session in enumerate(ordered_sessions, start=1):
-        label = sanitize_label(str(session["label"]))
+        label = str(position)
         new_name = f"{position}-{label}"
         run_tmux(["rename-session", "-t", session["id"], new_name])
 

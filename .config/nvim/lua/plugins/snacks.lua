@@ -46,6 +46,19 @@ return {
       },
       picker = {
         enabled = true,
+        sources = {
+          files = {
+            hidden = true,  -- 显示隐藏文件
+            ignored = true, -- 显示被忽略的文件
+          },
+          grep = {
+            hidden = true,  -- 搜索隐藏文件
+            ignored = true, -- 搜索被忽略的文件
+          },
+          spelling = {
+            layout = { preset = "select" },
+          },
+        },
         previewers = {
           diff = {
             builtin = false, -- use Neovim for previewing diffs (true) or use an external tool (false)
@@ -56,11 +69,11 @@ return {
             args = {}, -- additional arguments passed to the git command. Useful to set pager options using `-c ...`
           },
         },
-        sources = {
-          spelling = {
-            layout = { preset = "select" },
-          },
-        },
+        -- sources = {
+        --   spelling = {
+        --     layout = { preset = "select" },
+        --   },
+        -- },
         win = {
           input = {
             keys = {
@@ -147,6 +160,8 @@ return {
       -- { "<leader>sb", function() require("snacks").picker.lines() end, desc = "[Snacks] Buffer lines" },
       -- { "<leader>sB", function() require("snacks").picker.grep_buffers() end, desc = "[Snacks] Grep open buffers" },
       { "<leader>sg", function() require("snacks").picker.grep() end, desc = "[Snacks] Grep" },
+      -- { "<leader>sg", function() require("snacks").picker.grep({ cwd = vim.uv.cwd() }) end, desc = "[Snacks] Grep (cwd)" },
+      { "<leader>sG", function() require("snacks").picker.grep() end, desc = "[Snacks] Grep (root)" },
       -- { "<leader>sw", function() require("snacks").picker.grep_word() end, desc = "[Snacks] Visual selection or word", mode = { "n", "x" } },
       -- search
       { '<leader>s"', function() require("snacks").picker.registers() end, desc = "[Snacks] Registers" },

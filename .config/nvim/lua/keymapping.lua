@@ -26,3 +26,18 @@ vim.keymap.set({ "n", "x" }, "x", '"_x')
 vim.keymap.set({ "n", "x" }, "d", '"_d')
 vim.keymap.set("n", "c", '"_c')
 vim.keymap.set({ "n", "v" }, "dd", '"_dd')
+
+
+-- 让 'y' 默认复制到系统剪贴板 ("+y)
+vim.keymap.set({ "n", "x" }, "y", '"+y', { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "yy", '"+yy', { desc = "Yank line to system clipboard" })
+
+-- 让 '<leader>y' 对应原版的 yank 功能 (复制到内部寄存器)
+vim.keymap.set({ "n", "x" }, "<leader>y", '""y', { desc = "Yank to internal register" })
+vim.keymap.set("n", "<leader>yy", '""yy', { desc = "Yank line to internal register" })
+
+-- <C-o> 回跳并居中
+vim.keymap.set("n", "<C-o>", "<C-o>zz", { desc = "Go back and center" })
+vim.keymap.set("n", "<C-i>", "<C-i>zz", { desc = "Go forward and center" })
+
+

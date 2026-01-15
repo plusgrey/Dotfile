@@ -11,7 +11,7 @@ IFS=$'\t' read -r detect_session_id detect_session_name term_width status_bg < <
 
 [[ -z "$current_session_id" ]] && current_session_id="$detect_session_id"
 [[ -z "$current_session_name" ]] && current_session_name="$detect_session_name"
-[[ -z "$status_bg" || "$status_bg" == "default" ]] && status_bg=black
+[[ -z "$status_bg" || "$status_bg" == "default" ]] # && status_bg=black
 term_width="${term_width:-100}"
 
 inactive_bg="#373b41"

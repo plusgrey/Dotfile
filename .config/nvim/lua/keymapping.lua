@@ -48,10 +48,10 @@ vim.keymap.set("n", "<C-o>", "<C-o>zz", { desc = "Go back and center" })
 vim.keymap.set("n", "<C-i>", "<C-i>zz", { desc = "Go forward and center" })
 
 -- 分屏快捷键
-vim.keymap.set("n", "<leader>wv", "<CMD>vsplit<CR", { desc = "Vertical split" })
-vim.keymap.set("n", "<leader>wh", "<CMD>split<CR", { desc = "Horizontal split" })
-vim.keymap.set("n", "<leader>we", "<CMD>equalize<CR", { desc = "Equalize splits" })
-vim.keymap.set("n", "<leader>wc", "<CMD>close<CR", { desc = "Close split" })
+vim.keymap.set("n", "<leader>wv", "<CMD>vsplit<CR>", { desc = "Vertical split" })
+vim.keymap.set("n", "<leader>wh", "<CMD>split<CR>", { desc = "Horizontal split" })
+vim.keymap.set("n", "<leader>we", "<CMD>equalize<CR>", { desc = "Equalize splits" })
+vim.keymap.set("n", "<leader>wc", "<CMD>close<CR>", { desc = "Close split" })
 
 -- 全局替换光标下单词
 vim.keymap.set(

@@ -21,12 +21,11 @@ vim.keymap.set("n", "<A-z>", "<CMD>set wrap!<CR>", { desc = "Toggle line wrap" }
 -- Quick save with Ctrl+S
 vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<CMD>w<CR>", { desc = "Save file" })
 
---delete without yanking
+-- Delete without yanking
 vim.keymap.set({ "n", "x" }, "x", '"_x')
 vim.keymap.set({ "n", "x" }, "d", '"_d')
 vim.keymap.set("n", "c", '"_c')
 vim.keymap.set({ "n", "v" }, "dd", '"_dd')
-
 
 -- 让 'y' 默认复制到系统剪贴板 ("+y)
 vim.keymap.set({ "n", "x" }, "y", '"+y', { desc = "Yank to system clipboard" })
@@ -48,4 +47,16 @@ vim.keymap.set({ "n", "x" }, "<leader>P", '""P', { desc = "Paste before from int
 vim.keymap.set("n", "<C-o>", "<C-o>zz", { desc = "Go back and center" })
 vim.keymap.set("n", "<C-i>", "<C-i>zz", { desc = "Go forward and center" })
 
+-- 分屏快捷键
+vim.keymap.set("n", "<leader>wv", "<CMD>vsplit<CR", { desc = "Vertical split" })
+vim.keymap.set("n", "<leader>wh", "<CMD>split<CR", { desc = "Horizontal split" })
+vim.keymap.set("n", "<leader>we", "<CMD>equalize<CR", { desc = "Equalize splits" })
+vim.keymap.set("n", "<leader>wc", "<CMD>close<CR", { desc = "Close split" })
 
+-- 全局替换光标下单词
+vim.keymap.set(
+  "n",
+  "<leader>rw",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Replace word cursor is on globally" }
+)

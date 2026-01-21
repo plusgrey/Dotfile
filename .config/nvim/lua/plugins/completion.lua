@@ -44,7 +44,23 @@ return {
         ["<C-u>"] = { "scroll_documentation_up", "fallback" },
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
 
-        ["<Tab>"] = { function(cmp) return cmp.accept() end, "fallback", },
+        -- ["<Tab>"] = { function(cmp) return cmp.accept() end, "fallback", },
+        ["<Tab>"] = {
+          function(cmp)
+            if cmp.is_menu_visible() then
+              return cmp.accept()
+            end
+
+            local ok, suggestion = pcall(require, "copilot.suggestion")
+            if ok and suggestion.is_visible() then
+              suggestion.accept()
+              return true
+            end
+
+            return false
+          end,
+          "fallback",
+        },
         ["<CR>"] = { function(cmp) return cmp.accept() end, "fallback", },
         -- Close current completion and insert a newline
         ["<S-CR>"] = { function(cmp) cmp.hide() return false end, "fallback", },

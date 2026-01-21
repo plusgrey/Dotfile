@@ -4,7 +4,20 @@ return {
     cmd = "Copilot",
     event = "VeryLazy",
     opts = {
-      suggestion = { enabled = false },
+      -- suggestion = { enabled = false },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        debounce = 75,
+        keymap = {
+          accept = "<C-]>",
+          accept_word = "<C-w>",
+          accept_line = "<C-l>",
+          next = "<M-;>",
+          prev = "<M-'>",
+          dismiss = "<M-[>",
+        },
+      },
       panel = { enabled = false },
       filetypes = {
         markdown = true,

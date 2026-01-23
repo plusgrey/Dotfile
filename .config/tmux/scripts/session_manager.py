@@ -3,7 +3,7 @@
 import re
 import subprocess
 import sys
-from typing import List, Dict
+from typing import Dict, List
 
 
 def run_tmux(args: List[str], check: bool = True, capture: bool = False) -> str:
@@ -20,11 +20,10 @@ def run_tmux(args: List[str], check: bool = True, capture: bool = False) -> str:
 
 
 def list_sessions() -> List[Dict[str, object]]:
-    output = run_tmux([
-        "list-sessions",
-        "-F",
-        "#{session_id}\t#{session_name}\t#{session_created}"
-    ], capture=True)
+    output = run_tmux(
+        ["list-sessions", "-F", "#{session_id}\t#{session_name}\t#{session_created}"],
+        capture=True,
+    )
     if not output:
         return []
 
@@ -39,13 +38,15 @@ def list_sessions() -> List[Dict[str, object]]:
         else:
             index = None
             label = name
-        sessions.append({
-            "id": session_id,
-            "name": name,
-            "created": created,
-            "index": index,
-            "label": label,
-        })
+        sessions.append(
+            {
+                "id": session_id,
+                "name": name,
+                "created": created,
+                "index": index,
+                "label": label,
+            }
+        )
 
     def sort_key(entry: Dict[str, object]):
         index = entry["index"]
@@ -61,8 +62,14 @@ def sanitize_label(label: str) -> str:
 
 
 def apply_order(ordered_sessions: List[Dict[str, object]]) -> None:
+    # for position, session in enumerate(ordered_sessions, start=1):
+    #     label = str(position)
+    #     new_name = f"{position}-{label}"
+    #     run_tmux(["rename-session", "-t", session["id"], new_name])
     for position, session in enumerate(ordered_sessions, start=1):
-        label = str(position)
+        # 保留用户的 label，只在前面加 index
+        raw_label = session.get("label", "")
+        label = sanitize_label(str(raw_label))
         new_name = f"{position}-{label}"
         run_tmux(["rename-session", "-t", session["id"], new_name])
 
@@ -147,7 +154,10 @@ def command_move_window_to_session(index_str: str) -> None:
         return
     current_id = current_session_id()
     if target_session_id != current_id:
-        run_tmux(["move-window", "-s", source_window_id, "-t", f"{target_session_id}:"], check=False)
+        run_tmux(
+            ["move-window", "-s", source_window_id, "-t", f"{target_session_id}:"],
+            check=False,
+        )
     run_tmux(["switch-client", "-t", target_session_id], check=False)
 
 

@@ -15,6 +15,7 @@ IFS=$'\t' read -r detect_session_id detect_session_name term_width status_bg < <
 term_width="${term_width:-100}"
 
 inactive_bg="#373b41"
+# inactive_bg="#000000"
 inactive_fg="#c5c8c6"
 active_bg="${TMUX_THEME_COLOR:-#FFC0CB}"
 active_fg="#1d1f21"
@@ -61,6 +62,49 @@ rendered=""
 prev_bg=""
 current_session_id_norm=$(normalize_session_id "$current_session_id")
 current_session_trimmed=$(trim_label "$current_session_name")
+# while IFS= read -r entry; do
+#   [[ -z "$entry" ]] && continue
+#   session_id="${entry%%::*}"
+#   name="${entry#*::}"
+#   [[ -z "$session_id" ]] && continue
+#
+#   session_id_norm=$(normalize_session_id "$session_id")
+#   segment_bg="$inactive_bg"
+#   segment_fg="$inactive_fg"
+#   trimmed_name=$(trim_label "$name")
+#   is_current=0
+#   if [[ "$session_id" == "$current_session_id" || "$session_id_norm" == "$current_session_id_norm" || "$trimmed_name" == "$current_session_trimmed" ]]; then
+#     is_current=1
+#     segment_bg="$active_bg"
+#     segment_fg="$active_fg"
+#   fi
+#
+#   if (( is_narrow == 1 )); then
+#     if (( is_current == 1 )); then
+#       label="$trimmed_name"  # active: show TITLE (trim N-)
+#     else
+#       idx=$(extract_index "$name")
+#       if [[ -n "$idx" ]]; then
+#         label="$idx"
+#       else
+#         label="$trimmed_name"
+#       fi
+#     fi
+#   else
+#     label="$trimmed_name"      # wide: current behavior (TITLE everywhere)
+#   fi
+#   if (( ${#label} > max_width )); then
+#     label="${label:0:max_width-1}…"
+#   fi
+#
+#   if [[ -z "$prev_bg" ]]; then
+#     rendered+="#[fg=${segment_bg},bg=${status_bg}]${left_cap}"
+#   else
+#     rendered+="#[fg=${prev_bg},bg=${segment_bg}]${separator}"
+#   fi
+#   rendered+="#[fg=${segment_fg},bg=${segment_bg}] ${label} "
+#   prev_bg="$segment_bg"
+# done <<< "$sessions"
 while IFS= read -r entry; do
   [[ -z "$entry" ]] && continue
   session_id="${entry%%::*}"
@@ -90,8 +134,15 @@ while IFS= read -r entry; do
       fi
     fi
   else
-    label="$trimmed_name"      # wide: current behavior (TITLE everywhere)
+    # 宽屏：如果有 index，就显示 "index-标题"，否则退回纯标题
+    idx=$(extract_index "$name")
+    if [[ -n "$idx" ]]; then
+      label="${idx}-${trimmed_name}"      # wide: current behavior (TITLE everywhere)
+    else
+      label="$trimmed_name"      # wide: current behavior (TITLE everywhere)
+    fi
   fi
+
   if (( ${#label} > max_width )); then
     label="${label:0:max_width-1}…"
   fi

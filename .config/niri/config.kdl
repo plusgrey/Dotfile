@@ -70,7 +70,7 @@ binds {
     Mod+T { spawn "wezterm"; }
     Mod+D { spawn "sh" "-lc" "noctalia-shell ipc call launcher toggle"
 }
-    Mod+B { spawn "google-chrome-stable" "--ozone-platform-hint=auto" "--enable-features=WaylandWindowDecorations"; }
+    Mod+B { spawn "zen"; }
     Mod+Q { close-window; }
     Mod+Shift+Slash { show-hotkey-overlay; } // 手动查看快捷键提示 (Mod+?)
 

@@ -69,8 +69,9 @@ binds {
     // ========== 基础应用启动 ==========
     Mod+T { spawn "wezterm"; }
     Mod+D { spawn "sh" "-lc" "noctalia-shell ipc call launcher toggle"
-}
-    Mod+B repeat=false {spawn "zen";}  // 启动 Zen
+    }
+    // Mod+B repeat=false {spawn "zen";}  // 启动 Zen
+    Mod+B repeat=false {spawn "systemd-run" "--user" "--scope" "zen";}
     Mod+Q { close-window; }
     Mod+Shift+Slash { show-hotkey-overlay; } // 手动查看快捷键提示 (Mod+?)
 

@@ -85,7 +85,6 @@ config.tab_max_width = 32
 ----------------------------------------------------------------
 -- 设置默认 Shell 为 zsh
 config.default_prog = { "/bin/zsh" } -- 或者是 '/usr/bin/zsh'，视系统而定
-enbale_wayland = true
 ----------------------------------------------------------------
 -- 8. 快捷键 (Key Bindings)
 ----------------------------------------------------------------
@@ -111,5 +110,8 @@ config.keys = {
 	{ key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
 	{ key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
 }
-
+config.front_end = "OpenGL"
+config.max_fps = 300
+config.animation_fps = 60
+config.enable_wayland = true
 return config

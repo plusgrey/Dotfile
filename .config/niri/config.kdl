@@ -152,9 +152,13 @@ binds {
     Mod+Shift+WheelScrollUp    { move-column-to-workspace-up; }
 
     // ========== 截图功能 ==========
-    Mod+Print { spawn "sh" "-c" "grim ~/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png && notify-send -t 3000 'Print Screen Successed'";}
-    //Mod+Shift+S { spawn "sh" "-c" "grim -g \"$(slurp)\" ~/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png && notify-send -t 3000 'Screenshot Saved'"; }
-    Mod+Shift+S { spawn "sh" "-c" "file=~/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png; grim -g \"$(slurp)\" \"$file\" && wl-copy < \"$file\" && notify-send -t 3000 'Screenshot Saved & Copied'"; }
+    Mod+Print {
+        spawn "sh" "-c" "grim ~/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png && noctalia-shell ipc call toast send '{\"title\":\"截图成功\",\"body\":\"已保存到 Screenshots\",\"type\":\"notice\",\"duration\":3000}'";
+    }
+
+    Mod+Shift+S {
+        spawn "sh" "-c" "file=~/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png; grim -g \"$(slurp)\" \"$file\" && wl-copy < \"$file\" && noctalia-shell ipc call toast send '{\"title\":\"截图已保存\",\"body\":\"已复制到剪贴板\",\"type\":\"notice\",\"duration\":3000}'";
+    }
     // ========== 系统控制 ==========
     Mod+Shift+E { quit; }
 

@@ -213,10 +213,6 @@
             },
             {
                 "enabled": true,
-                "id": "timer-card"
-            },
-            {
-                "enabled": true,
                 "id": "weather-card"
             }
         ]
@@ -269,6 +265,16 @@
                 },
                 {
                     "id": "WallpaperSelector"
+                },
+                {
+                    "enableOnStateLogic": true,
+                    "generalTooltipText": "Record Screen",
+                    "icon": "video",
+                    "id": "CustomButton",
+                    "onClicked": "sh ~/dotfiles/.config/noctalia/record_screen.sh",
+                    "onMiddleClicked": "",
+                    "onRightClicked": "",
+                    "stateChecksJson": "[{\"command\":\"test -f /tmp/noctalia-recording.pid\",\"icon\":\"video-filled\"}]"
                 }
             ],
             "right": [
@@ -476,7 +482,7 @@
         "diskCriticalThreshold": 90,
         "diskPollingInterval": 3000,
         "diskWarningThreshold": 80,
-        "enableDgpuMonitoring": false,
+        "enableDgpuMonitoring": true,
         "externalMonitor": "resources || missioncenter || jdsystemmonitor || corestats || system-monitoring-center || gnome-system-monitor || plasma-systemmonitor || mate-system-monitor || ukui-system-monitor || deepin-system-monitor || pantheon-system-monitor",
         "gpuCriticalThreshold": 90,
         "gpuPollingInterval": 3000,

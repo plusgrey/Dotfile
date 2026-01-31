@@ -223,5 +223,8 @@ alias ff='fastfetch'
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # Nixos
-alias nrb='sudo nixos-rebuild boot --flake'
-alias nrs='sudo nixos-rebuild switch --flake'
+alias nixrb='sudo nixos-rebuild boot --flake'
+alias nixrs='sudo nixos-rebuild switch --flake'
+
+#niri
+alias nirisc='niri msg action load-config-file'
